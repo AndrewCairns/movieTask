@@ -1,0 +1,453 @@
+/*-----------------------------------------------------------------------------
+Version: 1.0
+Author: Andrew Cairns
+Email:  cairnsy17@hotmail.co.uk 
+ -----------------------------------------------------------------------------*/
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Bebas';
+    src: url('../fonts/BebasNeue.otf');
+}
+
+@font-face {
+    font-family: 'FuturaBold';
+    src: url('../fonts/Futura-CondensedExtraBold-Th.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*---------------------------------------------- RESET ---------------------------------------------------------------*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+
+/*---------------------------------------------- REUSEABLES ---------------------------------------------------------------*/
+
+.red {
+  color: #f6543f;
+}
+
+
+html {  
+  height: 100%;
+}
+
+body
+{
+  font-family: Helvetica, sans-serif;
+  font-size: 62.5%;
+  font-size: 1.0em;
+  color: #333333;
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2.8em;
+  font-weight: bold;
+  text-align: center;
+  padding: 40px 0px 0px 0px;
+  text-decoration: underline;
+  }
+h3 {
+  font-size: 1.2em;
+  font-weight: bolder;
+  text-align: center;
+  padding: 20px;
+  }
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+a:link {
+}
+a:visited {
+}
+
+a:hover {
+  color: #f6543f;
+  background-color: none;
+}
+
+a img:hover {
+  -moz-opacity:.75; 
+  filter:alpha(opacity=75); 
+  opacity:.75; 
+}
+
+a:active, a:focus {
+  color: #f6543f;
+  background-color: none;
+  border-bottom: none;
+}
+
+
+.container {
+    height: 92%;
+    width: 100%;
+}
+
+.topbar {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background: #45484d; /* Old browsers */
+    background: -moz-linear-gradient(top, #45484d 0%, #000000 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #45484d 0%,#000000 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #45484d 0%,#000000 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #45484d 0%,#000000 100%); /* W3C */
+    box-sizing: border-box;
+}
+
+.topbar img {
+    display: block;
+    float: left;
+    height: 35px;
+    padding-left: 20px;
+    padding-top: 8px;
+}
+
+
+
+.search-container {
+    display: block;
+    float: left;
+    width: 25%;
+    height: 100%;
+    border-right: 2px solid #f6543f;
+    box-sizing: border-box;
+    padding-right: 15px;
+}
+
+.search {
+    height: 100%;
+}
+
+.img-container {
+    display: block;
+    float: left;
+    width: 75%;
+    box-sizing: border-box;
+}
+
+.watchlist-list {
+  display: inline-block;
+  width: 25%;
+}
+.overlay {
+  display: inline-block;
+}
+
+.overlay img {
+  width: 100%;
+}
+.overlay {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  color: white;
+  font-family: Arial;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.overlay p {
+    display: none;
+}
+.overlay p.title {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  width: 80%;
+}
+.overlay p.imdb-rating {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+.overlay p.year {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.overlay p.genre {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+.overlay .watched {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.overlay .watched i {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.active {
+  background: #fff;
+  border-radius: 16%;
+  height: 0.75em;
+  width: 1em !important;
+}
+
+.watched-hover {
+  opacity: 0.6;
+}
+
+.overlay .rating-stars {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+/* Rating Star Widgets Style */
+.overlay .rating-stars ul {
+  list-style-type:none;
+  padding:0;
+  
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.overlay .rating-stars ul > li.star {
+  display:inline-block;
+  
+}
+
+.overlay .rating-stars ul > li.star > i.fa {
+  font-size:1.5em;
+  color:#ccc;
+}
+
+.overlay .rating-stars ul > li.star.hover > i.fa {
+  color:#FFCC36;
+}
+.overlay .rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
+.overlay:hover {
+  background-color: black;
+}
+.overlay:hover img {
+  opacity: 0.2;
+}
+
+form.genre-form {
+  width: 100%;
+  display: inline-block;
+}
+form.genre-form h3 {
+  float: right;
+}
+
+form.genre-form select {
+  background: #fff;
+  border: none;
+  float: right;
+  margin: 20px;
+}
+
+input {
+  line-height: normal;
+  width: 100%;
+  height: 100px;
+  margin: 0px auto;
+  display: block;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-weight: 600;
+  font-size: 3em; 
+}
+
+input:focus {
+  background: #fff;
+  outline: none;
+}
+
+form {
+  margin: 50px 0px;
+}
+form input::-webkit-input-placeholder {
+  opacity: 0.2
+}
+
+
+.search-block {
+  list-style: none;
+  display: block;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #f6f6f6;
+  box-sizing: border-box;
+}
+
+.search-block .text-block {
+  display: inline-block;
+  float: left;
+  width: 155px;
+  padding: 20px 10px;
+  text-align: center;
+}
+.search-block .text-block p.title {
+  font-size: 1em;
+  font: Ariel;
+  font-weight: 500;
+}
+.search-block .text-block p.year {
+  font: Ariel;
+  font-size: 0.7em;
+  font-weight: 400;
+  opacity: 0.7;
+  text-transform: capitalize;
+}
+.search-block .search-img {
+  display: inline-block;
+  max-height: 80px;
+  max-width: 62px;
+  float: right;
+}
+
+button.watchlist {
+  min-width: 10%;
+  float: right;
+  height: 80px;
+  border: none;
+  background-color: #f6543f;
+  color: #fff;
+}
+
+
+
+
+/*-------------- LIGHTBOX EDITS -----------------*/
+
+.lb-outerContainer{
+  background-image: url('../images/bg.png'); 
+  border-radius: 4px 4px 0px 0px;
+}
+
+.lb-dataContainer {
+  background-color: #fff;
+}
+
+.lb-data .lb-number {
+  visibility: hidden;
+  display: none;
+}
+
+.lb-details {
+  font-family: Helvetica;
+  background-image: url('../images/bg.png'); 
+  padding-bottom: 8px;
+}
+
+.lb-close {
+  margin-right: 10px;
+  margin-top: 3px;
+  display: block;
+}
+
+.fl {
+    display: block;
+    float: left;
+}
+
+.fr {
+    display: block;
+    float: right;
+}
+
+.infowindowPara {
+    width: 200px;
+}
+
+
+.infoWindowContainer {
+    border:2px solid black;
+    margin-top: 8px;
+    background:#333;
+    color:#FFF;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    padding: .5em 1em;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    text-shadow:0 -1px #000000;
+    -webkit-box-shadow: 0 0  8px #000;
+    box-shadow: 0 0 8px #000;
+}
+
+
+
+/* Smartphones (portrait) ----------- */
+/*@media only screen (max-width : 320px) {
+*/
+@media screen and (max-width: 320px) {
+
+  .search-container {
+      width: 100%;
+      height: 80%;
+      border-right: none;
+      border-bottom: 2px solid #f6543f;
+  }
+
+  .img-container {
+      width: 100%;
+      height: 100%;
+  }
+
+  .topbar div.search input:focus {
+      opacity: 1;
+      width: 160px;
+      outline:0;
+      background-color: #fff;
+  }
+  
+  .img-container {
+      height: 95%;
+  }
+  .img-container > div {
+      width: 33.333%;
+      height: calc(100% / 5);
+  }
+  .img-container > div > a img.eachImage {
+      opacity: 1;
+  }
+
+}
+
+
+
+
+
